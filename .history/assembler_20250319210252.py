@@ -159,4 +159,3 @@ def assemble(assembly_code):
         object_code.append(f"{hex(addr)}: {hex(machine_code)}")
     
     return object_code, errors
-
