@@ -88,7 +88,7 @@ def assemble(assembly_code):
         
         machine_code = 0
         
-        if opcode in TWO_OPERAND_OPS:     
+        if opcode in TWO_OPERAND_OPS:
             if len(operands) != 2:
                 errors.append(f"Hata: {opcode} komutu iki operand gerektirir")
                 continue

@@ -38,8 +38,8 @@ def assemble(assembly_code):
         
         # Eğer satırda label varsa (':' karakteri ile)
         if ":" in line:
-            label_part, line = line.split(":", 1)                   
-            label = label_part.strip()                              
+            label_part, line = line.split(":", 1)
+            label = label_part.strip()
             if label in SYMTAB:
                 errors.append(f"Hata: '{label}' etiketi tekrarlandı")
             else:
@@ -54,7 +54,7 @@ def assemble(assembly_code):
         operand_str = parts[1].strip() if len(parts) > 1 else ""
         
         # Direktif kontrolü
-        if opcode == "START":      
+        if opcode == "START":
             try:
                 LOCCTR = int(operand_str, 16) if operand_str else 0
             except ValueError:
@@ -88,7 +88,7 @@ def assemble(assembly_code):
         
         machine_code = 0
         
-        if opcode in TWO_OPERAND_OPS:     
+        if opcode in TWO_OPERAND_OPS:
             if len(operands) != 2:
                 errors.append(f"Hata: {opcode} komutu iki operand gerektirir")
                 continue

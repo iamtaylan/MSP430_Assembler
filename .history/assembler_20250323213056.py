@@ -18,28 +18,28 @@ ADDRESSING_MODES = {
 }
 
 # Talimat türlerini belirleyelim
-TWO_OPERAND_OPS = {"MOV", "ADD", "SUB", "CMP", "AND", "OR", "XOR", "DADD","BIT"}
-ONE_OPERAND_OPS = {"JMP", "JZ", "JNZ", "CALL", "PUSH", "POP", "SWPB", "RRA", "SXT"}
+TWO_OPERAND_OPS = {"MOV", "ADD", "SUB", "CMP", "AND", "OR", "XOR", "BIT"}
+ONE_OPERAND_OPS = {"JMP", "JZ", "JNZ", "CALL", "PUSH", "POP", "SWPB", "DADD", "RRA", "SXT"}
 ZERO_OPERAND_OPS = {"RET"}
 
 def assemble(assembly_code):
     errors = []
     object_code = []
     SYMTAB.clear()
-    LOCCTR = 0 
-    intermediate_file = []  
+    LOCCTR = 0
+    intermediate_file = []
     
     # Birinci geçiş: Sembol tablosu oluşturma ve ara dosya hazırlama
     for line in assembly_code.splitlines():
         # Yorumları kaldır ve boşlukları temizle
-        line = line.split(";")[0].strip()  
+        line = line.split(";")[0].strip()
         if not line:
             continue
         
         # Eğer satırda label varsa (':' karakteri ile)
         if ":" in line:
-            label_part, line = line.split(":", 1)                   
-            label = label_part.strip()                              
+            label_part, line = line.split(":", 1)
+            label = label_part.strip()
             if label in SYMTAB:
                 errors.append(f"Hata: '{label}' etiketi tekrarlandı")
             else:
@@ -54,7 +54,7 @@ def assemble(assembly_code):
         operand_str = parts[1].strip() if len(parts) > 1 else ""
         
         # Direktif kontrolü
-        if opcode == "START":      
+        if opcode == "START":
             try:
                 LOCCTR = int(operand_str, 16) if operand_str else 0
             except ValueError:
@@ -88,7 +88,7 @@ def assemble(assembly_code):
         
         machine_code = 0
         
-        if opcode in TWO_OPERAND_OPS:     
+        if opcode in TWO_OPERAND_OPS:
             if len(operands) != 2:
                 errors.append(f"Hata: {opcode} komutu iki operand gerektirir")
                 continue
