@@ -5,7 +5,7 @@ from PyQt5.QtGui import QFont, QTextCharFormat, QColor, QSyntaxHighlighter
 from PyQt5.QtCore import Qt
 
 # 21g.py dosyasını dinamik olarak içe aktarma
-spec = importlib.util.spec_from_file_location("msp430_assembler", "assembler.py")
+spec = importlib.util.spec_from_file_location("msp430_assembler", "21g.py")
 msp430_assembler = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(msp430_assembler)
 

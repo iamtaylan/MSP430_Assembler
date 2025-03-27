@@ -1,0 +1,3 @@
+START 0x1000
+MOV #10, R6
+END
